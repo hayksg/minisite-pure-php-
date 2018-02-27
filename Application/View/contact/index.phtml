@@ -1,0 +1,66 @@
+<div class="row mt-4">
+    <div class="col-sm-12">
+        <h4><?= $this->clearStr($this->getHeadTitle()) ?></h4>
+        <hr> 
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-sm-12">
+        <div>
+            <div><i class="fas fa-phone"></i>&nbsp;&nbsp;<em>Tel (123) 22 33 556</em></div>
+            <div><i class="fas fa-address-book"></i>&nbsp;&nbsp;<em>Some address</em></div>
+        </div>
+    </div>
+</div>
+
+<div class="message-box">
+    <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+    <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-10">
+        <form action="/contact/mail" method="post" id="contact-form">          
+            
+            <div class="row">               
+                <div class="col-md-12 offset-md-2">
+                    <input type="hidden" name="csrf" value="<?= $this->setCsrf() ?>">
+                    <div class="text-danger my-1"><?= $this->getErrorMessage('csrfError'); ?></div>
+                </div>
+            </div> 
+
+            <div class="form-group row">
+                <label class="col-form-label col-md-2 asterisk" for="email">Email:</label> 
+                <div class="col-md-10">
+                    <input id="email" type="email" name="email" class="form-control" required="required">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('emailError'); ?></div>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-form-label col-md-2 asterisk" for="subject">Subject:</label> 
+                <div class="col-md-10">
+                    <input id="subject" type="text" name="subject" class="form-control" required="required">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('subjectError'); ?></div>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-form-label col-md-2 asterisk" for="message">Message:</label>  
+                <div class="col-md-10">
+                    <textarea id="message" name="message" class="form-control" required></textarea>
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('messageError'); ?></div>
+                </div>
+            </div>   
+            
+            <br>
+            <div class="row">               
+                <div class="col-md-12 offset-md-2">
+                    <input type="submit" value="Submit" name="send-message" class="btn btn-outline-primary">
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>

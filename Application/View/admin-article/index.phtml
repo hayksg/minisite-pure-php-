@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="mb-3">
+            <a href="/admin/manage-articles/add" class="btn btn-outline-primary">Add article</a>
+        </div>
+    </div>
+    <?php if (! $articles) : ?>
+    <div class="col-sm-12">
+        <h5>The list is empty</h5> 
+        <div class="message-box mt-2">
+            <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+            <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+        </div>
+    </div>
+    <?php else : ?>
+    <div class="col-sm-12">
+        <div class="message-box">
+            <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+            <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Content</th>
+                    <th>Image</th>
+                    <th>Date</th>
+                    <th>Is Public</th>
+                    <th>Actions</th>
+                </tr>
+                <?php foreach ($articles as $article) : ?>
+                <tr>
+                    <td><?= ++$cnt ?></td>
+                    <td><?= $this->cutString($this->clearStr($article->title)) ?></td>
+                    <td><?= $this->cutString($this->clearStr($category->getByColumns(['id' => $this->clearStr($article->category_id)])->name)) ?></td>                   
+                    <td><?= $this->cutString($this->entityDecode($article->description)) ?></td>
+                    <td><?= $this->cutString($this->entityDecode($article->content), 15) ?></td>
+                    <td><img src="<?= $this->clearStr($article->image) ?>" class="img-fluid thumbnail" alt="img"></td>
+                    <td><?= $this->getDateTime($article->date_time) ?></td>
+                    <td><?= $this->clearStr($article->is_public) ? 'Yes' : 'No'; ?></td>
+                    <td>
+                        <a href="/admin/manage-articles/edit/<?= $this->clearInt($article->id) ?>">Edit</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <form action="/admin/manage-articles/delete/<?= $this->clearInt($article->id) ?>" method="post" class="form-delete confirm-plugin">
+                            <input type="hidden" name="csrf" value="<?= $this->setCsrfArray($this->clearInt($article->id)) ?>">                               
+                            <button type="submit" name="delete" value="submit">Delete</button>                           
+                        </form>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>  
+    </div>
+
+        <?php if ($articlesCount > $showByDefault) : ?>
+        <div class="col-sm-12 mt-5"><?= $pagination->get() ?></div>
+        <?php endif; ?>
+    
+    <?php endif; ?>
+</div>

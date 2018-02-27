@@ -1,0 +1,80 @@
+<script src="/js/ckeditor.js"></script>
+<script>
+    $(function(){ ClassicEditor.create( document.querySelector( '#editor' ) ).catch( error => {console.error( error );} ); });
+</script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="message-box">
+            <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+            <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+        </div>
+        
+        <h5 class="mb-4">Social icons</h5>
+        <form action="/admin/manage-footer/editIcons" method="post" id="edit-social-icons-form">
+            <div class="row">               
+                <div class="col-md-12 offset-md-2">
+                    <input type="hidden" name="csrf" value="<?= $this->setCsrfArray('social-icons') ?>">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('csrfError'); ?></div>
+                </div>
+            </div>  
+            
+            <div class="form-group row">
+                <label class="col-form-label col-md-2" for="title">Twitter:</label> 
+                <div class="col-md-10">
+                    <input id="twitter" type="text" name="twitter" class="form-control" value="<?= $this->fileGetContent('soc-icons/twitter.txt'); ?>">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('twitterError'); ?></div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-md-2" for="title">Facebook:</label> 
+                <div class="col-md-10">
+                    <input id="facebook" type="text" name="facebook" class="form-control" value="<?= $this->fileGetContent('soc-icons/facebook.txt'); ?>">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('facebookError'); ?></div>
+                </div>
+            </div> 
+            
+            <div class="form-group row">
+                <label class="col-form-label col-md-2" for="title">Youtube:</label> 
+                <div class="col-md-10">
+                    <input id="youtube" type="text" name="youtube" class="form-control" value="<?= $this->fileGetContent('soc-icons/youtube.txt'); ?>">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('youtubeError'); ?></div>
+                </div>
+            </div>
+            
+            <div class="row">               
+                <div class="col-md-12 offset-md-2">
+                    <input type="submit" value="Submit" name="edit-social-icons" class="btn btn-outline-primary">
+                </div>
+            </div>
+        </form>
+        
+        <hr class="my-5">
+
+        <form action="/admin/manage-footer/editFooterText" method="post" id="edit-footer-form">
+            <div class="row">               
+                <div class="col-md-12">
+                    <input type="hidden" name="csrf" value="<?= $this->setCsrfArray('footer-text') ?>">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('csrfError'); ?></div>
+                </div>
+            </div>          
+
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <label class="col-form-label" for="editor" id="edit-footer-content-label"><h5>Footer content:</h5></label> 
+                </div>
+                <div class="col-md-12">
+                    <textarea name="footer-content" id="editor" class="form-control" ><?= $this->fileGetContent('footer/footer-text.txt'); ?></textarea>
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('contentError'); ?></div>
+                </div>
+            </div>  
+            
+            <div class="row">               
+                <div class="col-md-12">
+                    <input type="submit" value="Submit" name="edit_footer" class="btn btn-outline-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+  

@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-sm-6 order-sm-6">
+        <div>
+            <p>You have the following capabilities:</p>
+            <ul class='list-unstyled'>
+                <li><a href='/admin/manage-categories'>Manage categories</a></li>
+                <li><a href='/admin/manage-articles'>Manage articles</a></li>
+                <li><a href='/admin/manage-comments'>Manage comments</a></li>
+                <li><a href='/admin/manage-slider'>Manage slider</a></li>
+                <li><a href='/admin/manage-footer'>Manage footer</a></li>
+                <?php if ($this->clearStr($admin->role) === 'super_admin') : ?>
+                <li><a href='/admin/manage-admins'>Manage admins</a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6 order-first order-sm-6">
+        <div class="text-right greeting-admin">Hi <strong><?= $this->clearStr($admin->name) ?></strong>&nbsp; |&nbsp;
+            <a href="/logout" class="text-danger">Logout</a>
+        </div>
+    </div>
+</div>

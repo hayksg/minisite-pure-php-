@@ -1,0 +1,60 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="row mt-5">
+    <div class="col-md-10">
+        <form action="/admin/manage-admins/add" method="post" id="login-form">          
+            
+            <div class="row">               
+                <div class="col-md-12 offset-md-2">
+                    <input type="hidden" name="csrf" value="<?= $this->setCsrf() ?>">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('csrfError'); ?></div>
+                </div>
+            </div> 
+
+            <div class="form-group row">
+                <label class="col-form-label col-md-2 asterisk" for="title">Name:</label> 
+                <div class="col-md-10">
+                    <input id="name" type="text" name="name" class="form-control" required="required">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-form-label col-md-2 asterisk" for="email">Email:</label> 
+                <div class="col-md-10">
+                    <input id="name" type="email" name="email" class="form-control" required="required">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('emailError'); ?></div>
+                    <div class="text-danger"><?= $this->getErrorMessage('emailExistsError'); ?></div>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-form-label col-md-2 asterisk" for="password">Password:</label> 
+                <div class="col-md-10">
+                    <input id="password" type="password" name="password" class="form-control" required="required">                   
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-md-2 asterisk" for="confirm_password">Confirm<br>Password:</label> 
+                <div class="col-md-10">
+                    <input id="confirm_password" type="password" name="confirm_password" class="form-control" required="required">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('passwordConfirmError'); ?></div>                  
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-md-12 offset-md-2">
+                    <div class="g-recaptcha" data-sitekey="6Le4j0UUAAAAAAgyWv8tmtVNuYYlwDKCq8TMIr6H"></div>
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('recaptchaError'); ?></div>
+                </div>
+            </div>       
+
+            <br>
+            <div class="row">               
+                <div class="col-md-12 offset-md-2">
+                    <input type="submit" value="Submit" name="register" class="btn btn-outline-primary">
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>

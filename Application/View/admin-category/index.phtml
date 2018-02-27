@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="mb-3">
+            <a href="/admin/manage-categories/add" class="btn btn-outline-primary">Add category</a>
+        </div>
+        
+    </div>
+    <?php if (! $categories) : ?>
+    <div class="col-sm-12">
+        <h5>The list is empty</h5> 
+        <div class="message-box mt-2">
+            <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+            <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+        </div>
+    </div>
+    <?php else : ?>
+    <div class="col-sm-12">
+        <div class="message-box">
+            <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+            <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>#</th>
+                    <th>ID</th>                  
+                    <th>Name</th>                  
+                    <th>Parent Category</th>                                     
+                    <th>Is Public</th>
+                    <th>Order</th>
+                    <th>Actions</th>
+                </tr>
+                <?php foreach ($categories as $category) : ?>
+                <tr>
+                    <td><?= ++$cnt ?></td>
+                    <td><?= $this->clearInt($category->id) ?></td>
+                    <td><?= $this->clearStr($category->name) ?></td>
+                    <td><?= $this->getNestedCategories($category) ?></td>                   
+                    <td><?= $this->clearInt($category->is_visible) ? 'Yes' : 'No'; ?></td>
+                    <td><?= $this->clearInt($category->category_order) ?></td>
+                    <td>
+                        <a href="/admin/manage-categories/edit/<?= $this->clearInt($category->id) ?>">Edit</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <form action="/admin/manage-categories/delete/<?= $this->clearInt($category->id) ?>" method="post" class="form-delete confirm-plugin">
+                            <input type="hidden" name="csrf" value="<?= $this->setCsrfArray($category->id) ?>">                               
+                            <button type="submit" name="delete" value="submit">Delete</button>                           
+                        </form>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+    
+    <?php endif; ?>
+</div>
+  

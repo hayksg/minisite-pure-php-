@@ -1,0 +1,312 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-top: 54px;
+    padding-bottom: 100px;
+    
+    margin-bottom: 120px; /* Margin bottom by footer height */
+}
+
+@media (min-width: 992px) {
+    body {
+      padding-top: 56px;
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px; /* Set the fixed height of the footer here */
+}
+
+footer.footer a {
+    color: #FFF;
+    text-decoration: underline;
+}
+
+footer.footer a:hover {
+    text-decoration: underline;
+}
+
+#social-acons-block {
+    margin-top: 30px;
+    margin-bottom: 1px;
+}
+
+#social-acons-block li a:hover {
+    color: rgba(255,255,255,.75);
+}
+
+a:hover, a:focus {
+    outline: none;
+	text-decoration: none;
+}
+
+button:hover, button:focus {
+    outline: none;
+	text-decoration: none;
+}
+
+span:hover, span:focus {
+	outline: none;
+}
+
+.app-block-image {
+    margin-right: 20px;
+    width: 120px;
+    height:80px;
+}
+
+textarea {
+    min-height: 200px;
+}
+
+label.asterisk::after {
+    content: '*';
+    margin-left: 5px;
+    color: #d00;
+}
+
+.app-nav {
+    margin-top: 24px;
+}
+
+.app-nav a {
+    display: inline-block;
+}
+
+ul.topnav ul {
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.topnav span:first-child {   
+    text-align: right;
+    display: inline-block;
+    width: 20px;
+}
+
+/* Block for input type file */
+
+div.jfilestyle.jfilestyle-theme-custom input {
+	border-radius: .25rem;
+    background: #FFF;
+}
+
+div.jfilestyle.jfilestyle-theme-custom label {
+	border: 1px solid #007BFF;
+    border-radius: .25rem;
+}
+
+/* End block */
+
+a.highlight {
+	border: 1px solid #008BFF;
+}
+
+.app-breadcrumbs {
+	margin-top: 5px;
+}
+
+.thumbnail {
+	width: 50px;
+	height: 30px;
+}
+
+.form-delete {
+	display: inline-block;
+}
+
+.form-delete button {
+	border: none;
+	background: none;
+	color: #007bff;
+	padding-left: 0;
+}
+
+.form-delete button:hover, .form-delete button:focus {
+	color: #0056b3;
+	cursor: pointer;
+	outline: none;
+}
+
+.message-box {
+	height: 40px;
+}
+
+.articles-block {
+    margin-top: 24px;
+}
+
+.app-thumbnail {
+    max-height: 180px;
+}
+
+#back-to-top {
+	cursor: pointer;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	display:none;
+}
+
+/* Styles for bootstrap 4 tooltips */
+.tooltip-inner {
+    max-width: 400px;
+    padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    background-color: #0056b3;
+    border-radius: .25rem;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
+    margin-left: -3px;
+    content: "";
+    border-width: 5px 5px 0;
+    border-top-color: #0056b3;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before, .tooltip.bs-tooltip-right .arrow::before {
+    margin-top: -3px;
+    content: "";
+    border-width: 5px 5px 5px 0;
+    border-right-color: #0056b3;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .tooltip.bs-tooltip-bottom .arrow::before {
+    margin-left: -3px;
+    content: "";
+    border-width: 0 5px 5px;
+    border-bottom-color: #0056b3;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=left] .arrow::before, .tooltip.bs-tooltip-left .arrow::before {
+    right: 0;
+    margin-top: -3px;
+    content: "";
+    border-width: 5px 0 5px 5px;
+    border-left-color: #0056b3;
+}
+/* End block  */
+
+.ck-editor__editable {
+    min-height: 250px;
+}
+
+.modal-form {
+    display: none;
+}
+
+#navbar-search button {
+    cursor: pointer;
+    background: rgba(255,255,255,.5);
+}
+
+.mark {
+    color: red;
+    font-style: italic;
+}
+
+#edit-footer-content-label {
+    padding-left: 0;
+    margin-bottom: 6px;
+}
+
+#new-comment {
+    display: none;
+    border: 2px solid #ccc;
+}
+
+span.comment-data {
+    font-size: 13px;
+}
+
+hr.comment-block-hr {
+    margin: -7px 0 -1px;
+}
+
+/* Block for testimonial card (about us page) */
+.testimonial-card {
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 30px 60px 30px 60px;
+    position: relative;
+    text-align: center;
+}
+
+.testimonial-card img.testimonial-pic {
+    border-radius: 100px;
+    border: 10px solid #fff;
+    display: block;
+    margin: 0 auto;
+    margin-top: -75px;
+    max-width: 90px;
+    min-width: 90px;
+}
+
+.testimonial-card .testimonial {
+    color: #0f8c73;
+}
+
+.testimonial-card img.before-quote, .testimonial-card img.after-quote {
+    position: absolute;
+    top: calc(50% - 35px);
+    height: 20px;
+}
+
+.testimonial-card img.before-quote {
+    left: 20px;
+}
+
+.testimonial-card img.after-quote {
+    right: 20px;
+}
+
+.testimonial-card .customer, .testimonial-card .location {
+    color: #9b9b9b;
+    line-height: 1em;
+    margin: 0;
+}
+
+.testimonial-card .customer {
+    font-weight: 500;
+    letter-spacing: -0.45px;
+    margin-bottom: 3px;
+}
+
+/* End block */
+
+/* For load more process */
+.card-content {
+    display: none;
+}
+
+/* Block for ratings */
+
+.rating-wrapper {
+    display: inline-block;
+    
+}
+
+.rating-wrapper label input[type="radio"] {
+    display: none;
+}
+
+.rating-wrapper label i {
+    color: #369;
+    cursor: pointer;
+}
+
+#already-rated {
+    color: #d00;
+}
+
+/* End block */

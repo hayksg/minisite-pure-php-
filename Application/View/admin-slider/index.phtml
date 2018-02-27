@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="mb-3">
+            <a href="/admin/manage-slider/add" class="btn btn-outline-primary">Add image</a>
+        </div>
+        
+    </div>
+    <?php if (! $slider) : ?>
+    <div class="col-sm-12">
+        <h5>The list is empty</h5> 
+        <div class="message-box mt-2">
+            <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+            <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+        </div>
+    </div>
+    <?php else : ?>
+    <div class="col-sm-12">
+        <div class="message-box">
+            <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+            <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Is Visible</th>
+                    <th>Actions</th>
+                </tr>
+                <?php foreach ($slider as $item) : ?>
+                <tr>
+                    <td><?= ++$cnt ?></td>
+                    <td><img src="<?= $this->clearStr($item->image) ?>" class="img-fluid thumbnail" alt="img"></td>
+                    <td><?= $this->clearStr($item->is_visible) ? 'Yes' : 'No'; ?></td>
+                    <td>
+                        <a href="/admin/manage-slider/edit/<?= $this->clearInt($item->id) ?>">Edit</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <form action="/admin/manage-slider/delete/<?= $this->clearInt($item->id) ?>" method="post" class="form-delete confirm-plugin">
+                            <input type="hidden" name="csrf" value="<?= $this->setCsrfArray($this->clearInt($item->id)) ?>">                               
+                            <button type="submit" name="delete-slider-image" value="submit">Delete</button>                           
+                        </form>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+    
+    <?php endif; ?>
+</div>

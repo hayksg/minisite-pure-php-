@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-sm-12">
+        
+        <?php if (! $commentsJoinArticles) : ?>
+        <h5>The list is empty</h5> 
+        <div class="message-box mt-2">
+            <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+            <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+        </div>
+        <?php else : ?>
+        <br>
+        <input class="form-control" id="myInput" type="text" placeholder="Search for comment">
+        <br>
+        <div class="message-box mt-2">
+            <div class="text-success"><?= $this->getMessage('success') ?? ''; ?></div>
+            <div class="text-danger"><?= $this->getMessage('error') ?? ''; ?></div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>In article</th>
+                        <th>Author</th>
+                        <th>Email address</th>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+
+                <?php foreach ($commentsJoinArticles as $item) : ?>
+
+                <tr>                   
+                    <td><?= $this->clearStr($item->title) ?></td>
+                    <td><?= $this->clearStr($item->user_nickname) ?></td>      
+                    <td><?= $this->clearStr($item->user_email) ?></td>      
+                    <td><?= $this->cutString($item->content) ?></td>      
+                    <td><?= $this->getDateTime($item->entry_date, true) ?></td>      
+                    <td>
+                        <form action="/admin/manage-comments/delete/<?= $this->clearInt($item->id) ?>" method="post" class="form-delete confirm-plugin">
+                            <input type="hidden" name="csrf" value="<?= $this->setCsrfArray($this->clearInt($item->id)) ?>">                               
+                            <button type="submit" name="delete-comment" value="submit">Delete</button>                           
+                        </form>
+                    </td>      
+                </tr>
+
+                <?php endforeach; ?>
+                    
+                </tbody>
+            </table>
+        </div>
+        <?php endif; ?>
+        
+    </div>
+</div>

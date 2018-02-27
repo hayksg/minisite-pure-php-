@@ -1,0 +1,44 @@
+<div class="row">
+    
+    <div class="col-lg-3">    
+        <div class="fixed app-nav"><?= $categories; ?></div> <!-- Categories block -->
+    </div>
+    
+    <div class="col-lg-9 articles-block">      
+                   
+        <?php if (! $articles) : ?>
+            <h5>The category is empty</h5> 
+        <?php else : ?>
+        <div class="card-columns"> 
+            <?php foreach ($articles as $article) : ?>
+
+                <div class="card-content">
+                    <div class="card">
+                        <img class="card-img-top img-fluid img-thumbnail app-thumbnail" src="<?= $this->clearStr($article->image) ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"> <a href="/page/<?= $this->clearInt($article->id) ?>"><?= $this->clearStr($article->title) ?></a></h4>
+                            <p class="card-text"><?= $this->entityDecode($article->description) ?></p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+                                <a href="/page/<?= $this->clearInt($article->id) ?>" class="btn btn-primary btn-sm">Read more</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
+        </div>
+        <hr>
+        <br>
+
+        <?php endif; ?>
+
+        <div class="text-center">
+            <a href="#" id="loadMore" onclick="return false" class="btn btn-outline-primary btn-lg btn-block">
+                Load More &nbsp;<i class="fas fa-arrow-down"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>

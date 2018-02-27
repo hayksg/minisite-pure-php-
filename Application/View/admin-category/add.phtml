@@ -1,0 +1,61 @@
+<div class="row mt-5">
+    <div class="col-md-10">
+        <form action="/admin/manage-categories/add" method="post" id="add-category-form" enctype="multipart/form-data">
+            
+            <div class="row">               
+                <div class="col-md-12 offset-md-2">
+                    <input type="hidden" name="csrf" value="<?= $this->setCsrf() ?>">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('csrfError'); ?></div>
+                </div>
+            </div>          
+
+            <div class="form-group row">
+                <label class="col-form-label col-md-2 asterisk" for="title">Name:</label> 
+                <div class="col-md-10">
+                    <input id="name" type="text" name="name" class="form-control" required="required">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('nameError'); ?></div>
+                </div>
+            </div>
+                       
+            <div class="form-group row">
+                <label class="col-form-label col-md-2" for="title">Nested:</label> 
+                <div class="col-md-10">
+                    <select class="form-control selectpicker" name="category_id">   
+                        <option>Not nested</option>
+                        <?php foreach ($categories as $category) : ?>
+                        <option value="<?= $category->id; ?>"><?= $category->name; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div> 
+            
+            <div class="form-group row">
+                <label class="col-form-label col-md-2 asterisk" for="order">Order:</label> 
+                <div class="col-md-10">
+                    <input id="order" type="text" name="order" class="form-control" required="required">
+                    <div class="text-danger mt-1"><?= $this->getErrorMessage('orderError'); ?></div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <!-- &nbsp in order Public not to jump over to the next line when the width of the page is small -->
+                <label class="col-sm-2 col-3" for="is_public">Is&nbsp;Public:</label> 
+                <div class="col-sm-10 col-9">     
+                    <label class="custom-control custom-checkbox">           
+                          <input type="checkbox" class="custom-control-input" id="is_public" name="is_public" value="1">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description"></span>
+                    </label>
+                </div>
+            </div>          
+
+            <br>
+            <div class="row">               
+                <div class="col-md-12 offset-md-2">
+                    <input type="submit" value="Submit" name="add_category" class="btn btn-outline-primary">
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>

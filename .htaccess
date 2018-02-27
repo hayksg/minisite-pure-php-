@@ -1,0 +1,12 @@
+AddDefaultCharset utf-8
+# Do not allow to see contents of the folder
+Options All -Indexes
+DirectoryIndex index.php
+
+RewriteEngine on
+# If dir do not exists in request go to RewriteRule
+RewriteCond %{REQUEST_FILENAME} !-d
+# If file do not exists in request go to RewriteRule
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteBase /
+RewriteRule ^(.*)$ index.php

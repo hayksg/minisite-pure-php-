@@ -1,0 +1,1 @@
+&lt;p&gt;&copy; 2017 - 2018 by PHP-User. All rights reserved.&lt;/p&gt;
