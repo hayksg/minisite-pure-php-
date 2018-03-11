@@ -73,6 +73,7 @@ label.asterisk::after {
 
 .app-nav {
     margin-top: 24px;
+    overflow: hidden;
 }
 
 .app-nav a {

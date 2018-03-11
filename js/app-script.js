@@ -29,7 +29,7 @@ $(function(){
         openedSign: '<span class="dropup"><span class="dropdown-toggle"></span></span>'
     });
     
-    // In order don't work link witch has children
+    // In order don't work link which has children
 
     $('ul.topnav li a').on('click', function(){
         if ($(this).parent('li').has('ul').length != 0) {
@@ -37,6 +37,20 @@ $(function(){
         }
     });
     
+    // To add padding to each nested link in menu
+    
+    var menuLinks = $('ul.topnav').find('a');
+
+    menuLinks.each(function(){
+        var parentsUntilLength = $(this).parentsUntil('.app-nav').length;
+        var div = parentsUntilLength / 2;
+
+        if (div > 1) {
+            var res = (div - 1) * 40;
+            $(this).css('paddingLeft', res + 'px');
+        }
+    })
+ 
     /// Setting for class footer ////////////////////////////////////////////////////////
     
     if ($(document).width() < 370) {
@@ -263,8 +277,6 @@ $(function(){
     /// For load more process /////////////////////////////////////////////////////////////////////
     
     var cardCountToLoad = 6;
-    
-    console.log($(".card-content:hidden").length);
     
     if ($(".card-content:hidden").length == 0 || $(".card-content:hidden").length <= cardCountToLoad) {
         $("#loadMore").hide();
