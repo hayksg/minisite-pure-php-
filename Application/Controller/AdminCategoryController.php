@@ -170,35 +170,11 @@ class AdminCategoryController extends AbstractController
             if (in_array($hidden, $csrf)) {    
                 $this->deleteCsrf();
                 
-                /* Block for deletion nested articles images (on server) (If category has nested categories) */
-                $nestedCategoriesChain = $this->getNestedCategoriesChain($id);
-
-                array_walk_recursive($nestedCategoriesChain, function($value) {
-                    $articles = $categories = Article::getAllByColumns(['category_id' => $value->id]);
-                    if (is_array($articles) && count($articles) > 0) {
-                        array_walk_recursive($articles, function($article){
-                            if (is_file(getcwd() . '/' . $article->image)) {
-                                unlink(getcwd() . '/' . $article->image);
-                            }
-                        });
-                    }
-                });
-                /* End block */               
-                
-                /* Block for deletion articles images in category (on server) (If category has not nested categories) */            
-                $articles = $categories = Article::getAllByColumns(['category_id' => $id]);
-                if ($articles) {
-                    foreach ($articles as $article) {
-                        if (is_file(getcwd() . '/' . $article->image)) {
-                            unlink(getcwd() . '/' . $article->image);
-                        }
-                    }
-                }
-                /* End block */
-                
                 $category = Category::getById($this->clearInt($id));
-        
+                
                 if ($category) {
+                    $category->deleteArticlesImages();
+                    
                     if ($category->delete((int)$id)) {
                         $this->setMessage('success', 'The category successfully deleted!');                      
                         $this->getMessage('error'); // This will delete 'error' message
@@ -209,22 +185,4 @@ class AdminCategoryController extends AbstractController
         
         $this->redirectTo('/admin/manage-categories');
     }
-
-    private function getNestedCategoriesChain($categoryId)
-    {
-        $result = [];
-        //$categories = $this->entityManager->getRepository(Category::class)->findBy(['parentId' => $categoryId]);
-        
-        $categories = Category::getAllByColumns(['parent_id' => $categoryId]);
-        
-        if (! empty($categories)) {
-            foreach ($categories as $category) {
-                if (!empty($category)) {
-                    $result[] = $category;
-                    $result[] = $this->getNestedCategoriesChain($category->id);
-                }
-            }
-        }
-        return $result;
-    }   
 }

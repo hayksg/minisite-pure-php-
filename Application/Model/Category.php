@@ -38,4 +38,56 @@ class Category extends BaseModel
         
         return $output;
     }
+    
+    protected function getNestedCategoriesChain()
+    {
+        $result = [];
+        
+        $categories = $this->getAllByColumns(['parent_id' => $this->id]);
+        
+        if (! empty($categories)) {
+            foreach ($categories as $category) {
+                if (!empty($category)) {
+                    $result[] = $category;
+                    $result[] = $category->getNestedCategoriesChain();
+                }
+            }
+        }
+        return $result;
+    } 
+    
+    protected function deleteAllNestedCategoriesArticlesImages()
+    {
+        $nestedCategories = $this->getNestedCategoriesChain();
+        
+        array_walk_recursive($nestedCategories, function($value) {
+            $articles = Article::getAllByColumns(['category_id' => $value->id]);
+            if (is_array($articles) && count($articles) > 0) {
+                array_walk_recursive($articles, function($article){
+                    if (is_file(getcwd() . '/' . $article->image)) {
+                        unlink(getcwd() . '/' . $article->image);
+                    }
+                });
+            }
+        });
+    }
+    
+    protected function deleteCategoryArticlesImages()
+    {
+        $articles = Article::getAllByColumns(['category_id' => $this->id]);
+        
+        if ($articles) {
+            foreach ($articles as $article) {
+                if (is_file(getcwd() . '/' . $article->image)) {
+                    unlink(getcwd() . '/' . $article->image);
+                }
+            }
+        }
+    }
+    
+    public function deleteArticlesImages()
+    {
+        $this->deleteCategoryArticlesImages();
+        $this->deleteAllNestedCategoriesArticlesImages();
+    }
 }
